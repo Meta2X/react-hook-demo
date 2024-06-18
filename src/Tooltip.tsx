@@ -1,12 +1,26 @@
-import { useLayoutEffect, useRef, useState } from "react"
+import React, { useLayoutEffect, useRef, useState } from "react"
 import { createPortal } from "react-dom"
 import TooltipContainer from "./TooltipContainer"
-export default function Tooltip({targetRect, children}) {
-  const ref = useRef(null)
+
+type targetRect = {
+  left: number,
+  right: number,
+  top: number,
+  bottom: number,
+}
+type props = {
+  targetRect: targetRect
+  children: React.ReactNode
+}
+export default function Tooltip({targetRect, children}: props) {
+  const ref = useRef<HTMLDivElement>(null)
   const [tooltipHeight, setTooltipHeight] = useState(0)
+  
   useLayoutEffect(()=>{
-    const { height } = ref.current.getBoundingClientRect()
-    setTooltipHeight(height)
+    if(ref.current){
+      const { height } = ref.current.getBoundingClientRect()
+      setTooltipHeight(height)
+    }
   }, [])
 
   let tooltipX = 0
