@@ -1,18 +1,13 @@
-import { useEffect, useRef } from 'react';
-import Input, {RefProps}  from './Input'
+import { useEffect, useRef } from "react";
+import Input from "./Input";
 function App() {
-  const ref = useRef<RefProps>(null)
-  // const ref0 = useRef(0) 
-
+  const ref = useRef<HTMLInputElement>(null)
   useEffect(()=>{
-    console.log(ref.current)
-    ref.current?.newRef()
+    ref.current?.focus()
   }, [])
-
   return (
     <div className="App">
-      {/* <input ref={ref} /> */}
-      <Input ref={ref}/>
+      <Input inputRef={ref}/>
     </div>
   );
 }
